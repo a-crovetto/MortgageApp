@@ -1,1 +1,1 @@
-web: qunicorn mortgage.wsgi
+web: gunicorn mortgage.wsgi --log-file -
