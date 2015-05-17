@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="POST" action=""> {% csrf_token %}
+    <label for="capital" class="span2">Loan amount:</label>
+    <input type='number' class="span2" name='principal'><br>
+        <label for="interest" class="span2">Interest rate:</label>
+    <input type='number' class="span1" name='interest'> %
+   {{ form.as_p }}
+   <br>
+   <input type='submit' value='Calculate' class='btn span2'>
+    
+</form>
+
+</div>
+<br>
+<br>
+{% if valid == True %}
+    <h3>Capital : <span id="principal">{{ principal|floatformat }}</span> - Interes: <span id="interest">{{ interest|floatformat }}</span>%
+    </h3>
+    <div class="row">
+        <div class="span5">
+        <table id="calculation" class="table table-striped table-hover table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th>Years</th>
+                    <th>Monthly amount</th>
+                    <th>Total cost</th>
+                    <th>Total/Loan (in %)</th>
+                </tr>   
+            </thead>
+        
+        {% for v1,v2,v3 in  valor %}
+            <tr name="calc-rows" id='calc-rows-{{ forloop.counter }}'>
+                <td>{{ forloop.counter }}</td>
+                <td>{{v1 }}</td>
+                <td>{{v2 }}</td>
+                <td>{{v3 }}</td>
+               
+            </tr>
+        {% endfor %}
+        
+        </table>
+        </div>
+        <div class="span4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn" href="#">View details &raquo;</a></p>
+        </div>
+    </div>
+<div id='adjustmentTable'>
+    
+</div>
+{% endif %}
+
+
+{% endblock %}

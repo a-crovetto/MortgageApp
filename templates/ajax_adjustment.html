@@ -1,0 +1,31 @@
+{% if validForm == True %}
+
+    <h3> Tabla de amortizacion
+    </h3>
+    <div class="row">
+        <div class="span5">
+        <table id="amorTable" class="table table-striped table-hover table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th>Mes</th>
+                    <th>Cuota</th>
+                    <th>Intereses</th>
+                    <th>Amortizacion</th>
+                    <th>Capital vivo</th>
+                </tr>   
+            </thead>
+        
+        {% for v1,v2,v3 in  amTable %}
+            <tr name="amor-rows" id='amor-rows-{{ forloop.counter }}'>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ cuota }}</td>
+                <td>{{ v1 }}</td>
+                <td>{{ v2 }}</td>
+                <td>{{ v3 }}</td>    
+            </tr>
+        {% endfor %}
+        
+        </table>
+    </div>
+    </div>
+{% endif %}
