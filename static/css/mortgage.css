@@ -1,0 +1,6 @@
+/* Custom mortgage */
+
+#calculation .highlight-row td {
+  font-weight: bold !important;
+  background-color: #adcbe3 !important;
+}

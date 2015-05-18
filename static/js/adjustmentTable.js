@@ -11,13 +11,7 @@ $('[name="calc-rows"]').on('click', function(){
        },
        success: adjustmentSucces
     })
-    console.log("form submitted!")  // sanity check
-    console.log($('#' + this.id + '>td:nth-child(1)').text() )
-    console.log($('#' + this.id + '>td:nth-child(2)').text() )
-    console.log($('#principal').text() )
-    console.log($('#interest').text() )
-    console.log($('#' + this.id + '>td:nth-child(2)').text() )
-    return false
+    $(this).addClass( "highlight-row" ).siblings().removeClass('highlight-row');
 });
 
 function adjustmentSucces(data,textStatus,jqXHR)
