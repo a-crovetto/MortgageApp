@@ -27,15 +27,15 @@ def Amortization(request):
             years = int(request.GET['years'])
             interest = float(request.GET['interest'])
             principal = float(request.GET['principal'])
-            monthly = int(float(request.GET['monthly']))
+            cuota = int(float(request.GET['monthly']))
             validForm = True
-            amTable = calculateAmortization(years,interest,principal,monthly)
-            cuota = monthly
+            amTable = calculateAmortization(years,interest,principal)
         else:
             validForm = False
             amTable = ''
             cuota = ''
+            years = ''
         print "Ajax is valid: " + str(validForm)
-        context = {'amTable' : amTable, 'cuota' : cuota,'validForm' : validForm, }
+        context = {'amTable' : amTable, 'cuota' : cuota,'years' : years,'validForm' : validForm, }
         template = 'ajax_adjustment.html'
         return render(request, template, context)

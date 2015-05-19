@@ -24,7 +24,7 @@ def compound_interest(interest,principal,period,years):
     #print r
     return r
 
-def calculateAmortization(years,interest,principal,cuota):
+def calculateAmortization(years,interest,principal):
     cuota = compound_interest(interest,principal,12,years)[0]
     months = years * 12
     interest = interest / 1200
@@ -39,10 +39,10 @@ def calculateAmortization(years,interest,principal,cuota):
     
     # Defino todos los demas
     for x in range(1, months):
-        intereses[x]    = capital[x-1] * interest
+        intereses[x]       = capital[x-1] * interest
         amortizacion[x] = cuota - intereses[x]
-        capital[x]      = capital[x-1] - amortizacion[x]
-    capital[months] = 0
+        capital[x]           = capital[x-1] - amortizacion[x]
+    capital[(months-1)] = 0
     rows = zip(intereses,amortizacion,capital)
     #print type(rows)
     return rows
