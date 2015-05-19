@@ -29,10 +29,8 @@ def Amortization(request):
             principal = float(request.GET['principal'])
             monthly = int(float(request.GET['monthly']))
             validForm = True
-            print monthly
             amTable = calculateAmortization(years,interest,principal,monthly)
             cuota = monthly
-            print 'asdasdasd'
         else:
             validForm = False
             amTable = ''

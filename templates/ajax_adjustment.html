@@ -18,10 +18,10 @@
                 {% for v1,v2,v3 in  amTable %}
                 <tr name="amor-rows" id='amor-rows-{{ forloop.counter }}'>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ cuota }}</td>
-                    <td>{{ v1 }}</td>
-                    <td>{{ v2 }}</td>
-                    <td>{{ v3 }}</td>    
+                    <td>{{ cuota|floatformat:"0" }}</td>
+                    <td>{{ v1|floatformat:"0" }}</td>
+                    <td>{{ v2|floatformat:"0" }}</td>
+                    <td>{{ v3|floatformat:"0" }}</td>    
                 </tr>
                 {% endfor %}
             
