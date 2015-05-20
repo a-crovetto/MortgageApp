@@ -13,8 +13,6 @@ def home(request):
             interest = float(request.POST['interest'])
             principal = float(request.POST['principal'])
             valores = calculate(interest,principal)
-            print(interest)
-            print(principal)
         else:
             interest = ""
             principal = ""

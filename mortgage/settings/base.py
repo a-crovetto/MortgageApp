@@ -24,6 +24,8 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
+DEFAULT_CHARSET = 'utf-8'
+
 ALLOWED_HOSTS = []
 
 

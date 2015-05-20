@@ -4,7 +4,7 @@
     <div class='row'>
         <div class="col-md-4">
             <div class="jumbotron">
-                <h3>Calculo de Hipoteca</h3>
+                <h3>Cálculo de Hipoteca</h3>
                 <form method="POST" action=""> {% csrf_token %}
                     <div class="input-group">
                         <span class="input-group-addon">$</span>
@@ -12,7 +12,7 @@
                     </div>
                     <br>
                     <div class="input-group">  
-                        <input type='number' class="form-control" name='interest' placeholder="Interes">
+                        <input type='number' class="form-control" name='interest' placeholder="Interés">
                         <span class="input-group-addon">%</span>
                     </div>
                     <br>
@@ -20,17 +20,22 @@
                 </form>
             </div>
         </div>
+        
+        <div id="years-chart" class="container col-md-6">
+            
+        </div>
     </div>
    {{ form.as_p }}
 {% if valid == True %}
-    <h3>Capital : <span id="principal">{{ principal|floatformat }}</span> - Interes: <span id="interest">{{ interest|floatformat }}</span>%
+    
+    <h3>Capital : <span id="principal">{{ principal|floatformat }}</span> - Interés: <span id="interest">{{ interest|floatformat }}</span>%
     </h3>
     <div class="row">
         <div class="col-md-8">
             <table id="calculation" class="table table-striped table-hover table-condensed table-bordered">
                 <thead>
                     <tr>
-                        <th>Anios</th>
+                        <th>Años</th>
                         <th>Pago mensual</th>
                         <th>Costo total</th>
                         <th>Total/Prestamo (%)</th>
@@ -42,20 +47,89 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{v1|floatformat:"0" }}</td>
                     <td>{{v2|floatformat:"0" }}</td>
-                    <td>{{v3|floatformat:"0" }}</td>
-                   
+                    <td>{{v3|floatformat:"0" }}</td>     
                 </tr>
             {% endfor %}
             </table>
         </div>
 
     </div>
+    
+    
 <div class="row"> 
     <div id='adjustmentTable' class="col-md-8">
- 
     </div>   
 </div>
-{% endif %}
 
+<script type="text/javascript">
+        $(function () {
+    $('#years-chart').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: 'Posibles préstamos'
+        },
+        xAxis: {
+            min: 1,
+            tickInterval: 1,
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Moneda ($)'
+            },
+            min: 0,
+            minorGridLineWidth: 0,
+            gridLineWidth: 0,
+            alternateGridColor: null,
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -50,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        tooltip: {
+            valueSuffix: ' $'
+        },
+        plotOptions: {
+            spline: {
+                lineWidth: 4,
+                states: {
+                    hover: {
+                        lineWidth: 5
+                    }
+                },
+                marker: {
+                    enabled: false
+                },
+            }
+        },
+        series: [{
+            name: 'Pago mensual',
+            data: [
+                   {% for v1,v2,v3 in  valor %}  {{v1|floatformat:"0" }}, {% endfor %}
+                   ],
+                    pointStart: 1
+        }],
+        navigation: {
+            menuItemStyle: {
+                fontSize: '10px'
+            }
+        },
+        credits: {
+            enabled: false
+        }
+    });
+});
+    </script>
+{% endif %}
 
 {% endblock %}
